@@ -44,6 +44,11 @@ posts = [
     },
 ]
 
+posts_dict = {
+    0: posts[0],
+    1: posts[1],
+    2: posts[2],
+}
 
 def index(request):
     """Главная страница."""
@@ -54,10 +59,10 @@ def index(request):
 
 def post_detail(request, id):
     """Полное описание выбранной записи."""
-    if id not in posts.keys():
+    if id not in posts_dict:
         raise Http404(f"Поста {id} не существует")
     template = 'blog/detail.html'
-    context = {'post': posts[id]}
+    context = {'post': posts_dict[id]}
     return render(request, template, context)
 
 
